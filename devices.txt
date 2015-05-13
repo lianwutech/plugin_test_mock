@@ -1,0 +1,48 @@
+{
+  "devices":[
+    {"device_id":"home/1/0",
+      "device_addr:":"1",
+      "device_port:":"0",
+      "device_type":"testint",
+      "interval": 10,
+      "base_value":10,
+      "step":1,
+      "random_value": 10
+    },
+    {"device_id":"home/2/0",
+      "device_addr:":"2",
+      "device_port:":"0",
+      "device_type":"testfloat",
+      "interval": 10,
+      "base_value":10,
+      "step":0.1,
+      "random_value": 100
+    },
+    {"device_id":"home/3/0",
+      "device_addr:":"3",
+      "device_port:":"0",
+      "device_type":"testint",
+      "interval": 10,
+      "base_value":20,
+      "step":1,
+      "random_value": 20
+    },
+    {"device_id":"home/4/0",
+      "device_addr:":"4",
+      "device_port:":"0",
+      "device_type":"testfloat",
+      "interval": 10,
+      "base_value":100,
+      "step":0.1,
+      "random_value": 1000
+    }
+   ],
+  "network_name": "home",
+  "mqtt": {
+    "server": "127.0.0.1",
+    "port": 1883,
+    "client_id": "xxx",
+    "gateway_topic": "gateway"
+  },
+  "protocol_type": "bdyb"
+}
