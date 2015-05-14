@@ -44,10 +44,7 @@ class PluginDaemon(Daemon):
         mqtt_config = device_config_info["mqtt"]
         protocol_type = device_config_info["protocol_type"]
 
-
-
-        # 此处需注意启动顺序，先创建mqtt对象，然后创建channel对象，mqtt对象设置channel属性，mqtt才能够链接服务器
-        # 1、初始化mqttclient对象
+        # 初始化mqttclient对象
         mqtt_client = MQTTClient(mqtt_config, network_name)
         result = mqtt_client.connect()
         if not result:
@@ -69,7 +66,7 @@ class PluginDaemon(Daemon):
                         "device_addr": device_info["device_addr"],
                         "device_port": device_info["device_port"],
                         "device_type": device_info["device_type"],
-                        "protocol": device_info["protocol_type"],
+                        "protocol": protocol_type,
                         "data": "%d" % value
                     }
                     mqtt_client.publish_data(device_data_msg)
