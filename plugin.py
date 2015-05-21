@@ -29,8 +29,8 @@ device_config_info = load_config(devices_file_name)
 # 主函数
 class PluginDaemon(Daemon):
     def _run(self):
-        # 切换工作目录
-        os.chdir(cur_file_dir())
+        # 加载配置文件
+        device_config_info = load_config(cur_file_dir() + "/" + devices_file_name)
 
         if "devices" not in device_config_info \
                 or "network_name" not in device_config_info\

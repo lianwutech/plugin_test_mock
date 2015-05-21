@@ -78,9 +78,13 @@ class MQTTClient(object):
             # 该情况可能发生在插件启动时，channel已启动，但mqtt还未connect
             logger.debug("mqtt对象未初始化")
         else:
-            # self.mqtt_client.reconnect()
-            self.mqtt_client.publish(topic=self.gateway_topic, payload=json.dumps(device_data_msg))
-            logger.info("向Topic(%s)发布消息：%r" % (self.gateway_topic, device_data_msg))
+            try:
+                self.mqtt_client.publish(topic=self.gateway_topic, payload=json.dumps(device_data_msg))
+                logger.info("向Topic(%s)发布消息：%r" % (self.gateway_topic, device_data_msg))
+            except Exception,e :
+                logger.error("MQTT链接失败，错误内容:%r" % e)
+                self.mqtt_client.reconnect()
+                return False
 
     def run(self):
         try:
