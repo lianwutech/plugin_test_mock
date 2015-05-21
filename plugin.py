@@ -22,9 +22,6 @@ devices_file_name = "devices.txt"
 # 日志对象
 logger = logging.getLogger('plugin')
 
-# 配置信息
-device_config_info = load_config(devices_file_name)
-
 
 # 主函数
 class PluginDaemon(Daemon):
