@@ -8,6 +8,7 @@ import json
 import logging
 import threading
 import paho.mqtt.client as mqtt
+from paho.mqtt.client import MQTT_ERR_SUCCESS
 
 logger = logging.getLogger('plugin')
 
@@ -79,8 +80,14 @@ class MQTTClient(object):
             logger.debug("mqtt对象未初始化")
         else:
             try:
-                self.mqtt_client.publish(topic=self.gateway_topic, payload=json.dumps(device_data_msg))
-                logger.info("向Topic(%s)发布消息：%r" % (self.gateway_topic, device_data_msg))
+                result_code, local_mid = self.mqtt_client.publish(topic=self.gateway_topic, payload=json.dumps(device_data_msg))
+                logger.info("向Topic(%s)发布消息：%r,结果码:%d, mid:%d" %
+                            (self.gateway_topic,
+                             device_data_msg,
+                             result_code,
+                             local_mid))
+                if result_code != MQTT_ERR_SUCCESS:
+                    return False
             except Exception,e :
                 logger.error("MQTT链接失败，错误内容:%r" % e)
                 self.mqtt_client.reconnect()
