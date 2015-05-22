@@ -63,8 +63,11 @@ class MQTTClient(object):
 
     def connect(self):
         try:
-            self.mqtt_client.connect(host=self.server_addr, port=self.server_port, keepalive=60)
-            return True
+            result_code = self.mqtt_client.connect(host=self.server_addr, port=self.server_port, keepalive=60)
+            if result_code == MQTT_ERR_SUCCESS:
+                return True
+            else:
+                return False
         except Exception, e:
             logger.error("MQTT链接失败，错误内容:%r" % e)
             return False
