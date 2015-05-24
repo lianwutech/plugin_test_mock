@@ -64,7 +64,7 @@ class PluginDaemon(Daemon):
                         "device_port": device_info["device_port"],
                         "device_type": device_info["device_type"],
                         "protocol": protocol_type,
-                        "data": value
+                        "data": {"value": value}
                     }
                     mqtt_client.publish_data(device_data_msg)
 
