@@ -64,12 +64,12 @@ class PluginDaemon(Daemon):
                         "device_port": device_info["device_port"],
                         "device_type": device_info["device_type"],
                         "protocol": protocol_type,
-                        "data": "%d" % value
+                        "data": value
                     }
                     mqtt_client.publish_data(device_data_msg)
 
             logger.debug("周期处理结束")
-            time.sleep(0.1)
+            time.sleep(0.5)
 
 # 主函数
 def main(argv):

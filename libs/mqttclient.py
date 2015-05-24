@@ -8,6 +8,7 @@ import json
 import logging
 import threading
 import paho.mqtt.client as mqtt
+import paho.mqtt.publish as publish
 from paho.mqtt.client import MQTT_ERR_SUCCESS
 
 logger = logging.getLogger('plugin')
@@ -85,6 +86,7 @@ class MQTTClient(object):
             try:
                 self.mqtt_client.reconnect()
                 result_code, local_mid = self.mqtt_client.publish(topic=self.gateway_topic, payload=json.dumps(device_data_msg))
+
                 logger.info("向Topic(%s)发布消息：%r,结果码:%d, mid:%d" %
                             (self.gateway_topic,
                              device_data_msg,
